@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.border,
   },
   submitText: {
-    color: colors.text,
+    color: colors.buttonText,
     fontSize: font.sizes.md,
     fontWeight: '700',
   },

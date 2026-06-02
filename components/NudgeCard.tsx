@@ -36,7 +36,7 @@ export function NudgeCard({
         disabled={done}
         activeOpacity={0.7}
       >
-        <Text style={[styles.buttonText, { color: done ? colors.textMuted : darkButtonText ? colors.text : colors.white }]}>
+        <Text style={[styles.buttonText, { color: done ? colors.textMuted : darkButtonText ? colors.buttonText : colors.white }]}>
           {done ? 'Done ✓' : 'Mark Done'}
         </Text>
       </TouchableOpacity>

@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.md,
     alignItems: 'center',
   },
-  doneText: { color: colors.text, fontSize: font.sizes.md, fontWeight: '700' },
+  doneText: { color: colors.buttonText, fontSize: font.sizes.md, fontWeight: '700' },
   skipButton: {
     borderRadius: radius.md,
     paddingVertical: spacing.sm + 4,

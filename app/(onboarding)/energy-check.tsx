@@ -9,26 +9,26 @@ const DIMENSIONS = [
   {
     key: 'stress' as keyof EnergyBaseline,
     label: 'Stress level',
-    low: '😤 Overwhelmed',
-    high: '😌 At ease',
+    low: '😌 At ease',
+    high: '😤 Overwhelmed',
   },
   {
     key: 'connection' as keyof EnergyBaseline,
     label: 'Connection to partner',
-    low: '😔 Distant',
-    high: '😊 Close',
+    low: '😊 Close',
+    high: '😔 Distant',
   },
   {
     key: 'fulfillment' as keyof EnergyBaseline,
     label: 'Personal fulfillment',
-    low: '😞 Running on empty',
-    high: '😄 Fulfilled',
+    low: '😄 Fulfilled',
+    high: '😞 Running on empty',
   },
   {
     key: 'sleep' as keyof EnergyBaseline,
     label: 'Sleep quality',
-    low: '😫 Exhausted',
-    high: '✨ Rested',
+    low: '✨ Rested',
+    high: '😫 Exhausted',
   },
 ];
 

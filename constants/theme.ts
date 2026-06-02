@@ -1,15 +1,16 @@
 export const colors = {
-  background: '#F7FAF0',      // soft dawn green-white
-  card: '#FFFFFF',
-  primary: '#F5C842',         // warm sunrise yellow
-  primaryLight: '#FEF7D0',    // pale yellow glow
-  secondary: '#4A9B6F',       // deep morning green
-  secondaryLight: '#D4EDDE',  // soft mint
-  text: '#1E2D1F',            // dark forest green
-  textMuted: '#7A9480',       // muted sage
-  border: '#E4EFE0',          // light green-grey
-  streak: '#F5C842',          // yellow streak flame
-  white: '#FFFFFF',
+  background: '#1A2B1E',      // deep forest night
+  card: '#243228',            // dark moss card
+  primary: '#E8C547',         // warm earthy yellow
+  primaryLight: '#3A3018',    // dark yellow tint for highlights
+  secondary: '#7EC89A',       // soft sage green
+  secondaryLight: '#1E3326',  // dark green tint for highlights
+  text: '#E8E4D8',            // warm off-white parchment
+  textMuted: '#8A9E88',       // muted sage
+  border: '#2E4232',          // subtle dark green border
+  streak: '#E8C547',          // yellow streak flame
+  white: '#E8E4D8',           // use parchment as "white"
+  buttonText: '#1A2B1E',      // dark text on yellow buttons
 };
 
 export const spacing = {

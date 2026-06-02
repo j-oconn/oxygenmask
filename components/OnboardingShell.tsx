@@ -146,6 +146,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   nextDisabled: { backgroundColor: colors.border },
-  nextText: { color: colors.text, fontSize: font.sizes.md, fontWeight: '700' },
+  nextText: { color: colors.buttonText, fontSize: font.sizes.md, fontWeight: '700' },
   nextTextDisabled: { color: colors.textMuted },
 });
