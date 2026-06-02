@@ -11,7 +11,7 @@ Notifications.setNotificationHandler({
   }),
 });
 
-export async function requestPermissionsAndSchedule(): Promise<void> {
+export async function requestPermissionsAndSchedule(hour = 8): Promise<void> {
   if (Platform.OS === 'web') return;
 
   const { status } = await Notifications.requestPermissionsAsync();
@@ -19,7 +19,7 @@ export async function requestPermissionsAndSchedule(): Promise<void> {
 
   await Notifications.cancelAllScheduledNotificationsAsync();
 
-  // Daily nudge at 8am
+  // Daily nudge at user's chosen hour
   await Notifications.scheduleNotificationAsync({
     content: {
       title: 'Oxygen Mask',
@@ -27,7 +27,7 @@ export async function requestPermissionsAndSchedule(): Promise<void> {
     },
     trigger: {
       type: Notifications.SchedulableTriggerInputTypes.DAILY,
-      hour: 8,
+      hour,
       minute: 0,
     },
   });

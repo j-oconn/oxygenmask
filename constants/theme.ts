@@ -1,14 +1,14 @@
 export const colors = {
-  background: '#FFF5ED',
+  background: '#F7FAF0',      // soft dawn green-white
   card: '#FFFFFF',
-  primary: '#FF6B35',
-  primaryLight: '#FFE4D6',
-  secondary: '#6B9E78',
-  secondaryLight: '#D6EDDA',
-  text: '#2D2D2D',
-  textMuted: '#8A8A8A',
-  border: '#F0E8E0',
-  streak: '#FF6B35',
+  primary: '#F5C842',         // warm sunrise yellow
+  primaryLight: '#FEF7D0',    // pale yellow glow
+  secondary: '#4A9B6F',       // deep morning green
+  secondaryLight: '#D4EDDE',  // soft mint
+  text: '#1E2D1F',            // dark forest green
+  textMuted: '#7A9480',       // muted sage
+  border: '#E4EFE0',          // light green-grey
+  streak: '#F5C842',          // yellow streak flame
   white: '#FFFFFF',
 };
 

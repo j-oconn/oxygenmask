@@ -10,6 +10,7 @@ interface NudgeCardProps {
   accentColor: string;
   accentLight: string;
   onDone: () => void;
+  darkButtonText?: boolean;
 }
 
 export function NudgeCard({
@@ -20,6 +21,7 @@ export function NudgeCard({
   accentColor,
   accentLight,
   onDone,
+  darkButtonText = false,
 }: NudgeCardProps) {
   return (
     <View style={[styles.card, done && styles.cardDone]}>
@@ -34,7 +36,7 @@ export function NudgeCard({
         disabled={done}
         activeOpacity={0.7}
       >
-        <Text style={[styles.buttonText, { color: done ? colors.textMuted : colors.white }]}>
+        <Text style={[styles.buttonText, { color: done ? colors.textMuted : darkButtonText ? colors.text : colors.white }]}>
           {done ? 'Done ✓' : 'Mark Done'}
         </Text>
       </TouchableOpacity>

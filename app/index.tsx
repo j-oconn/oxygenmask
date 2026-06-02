@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import {
   View,
   Text,
@@ -7,30 +7,38 @@ import {
   SafeAreaView,
   RefreshControl,
 } from 'react-native';
-import { useFocusEffect } from 'expo-router';
+import { useFocusEffect, useRouter } from 'expo-router';
 import { NudgeCard } from '../components/NudgeCard';
 import { selfCareNudges, partnerCareNudges, getNudgeForToday } from '../lib/nudges';
 import { getTodayCompletions, markComplete, DayCompletions } from '../lib/storage';
-import { requestPermissionsAndSchedule } from '../lib/notifications';
+import { getProfile, hasSoloStatus, isOnboardingComplete } from '../lib/profile';
 import { colors, spacing, font } from '../constants/theme';
 
 export default function TodayScreen() {
+  const router = useRouter();
   const [completions, setCompletions] = useState<DayCompletions>({ selfCare: false, partnerCare: false });
   const [refreshing, setRefreshing] = useState(false);
+  const [isSolo, setIsSolo] = useState(false);
+
+  // Redirect to onboarding if not yet completed
+  useEffect(() => {
+    isOnboardingComplete().then(done => {
+      if (!done) router.replace('/(onboarding)/welcome');
+    });
+  }, []);
 
   const selfCareNudge = getNudgeForToday(selfCareNudges);
   const partnerCareNudge = getNudgeForToday(partnerCareNudges);
 
   const load = useCallback(async () => {
-    const data = await getTodayCompletions();
+    const [data, profile] = await Promise.all([getTodayCompletions(), getProfile()]);
     setCompletions(data);
+    if (profile?.relationshipStatus) {
+      setIsSolo(hasSoloStatus(profile.relationshipStatus));
+    }
   }, []);
 
   useFocusEffect(useCallback(() => { load(); }, [load]));
-
-  useEffect(() => {
-    requestPermissionsAndSchedule();
-  }, []);
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -49,7 +57,8 @@ export default function TodayScreen() {
     day: 'numeric',
   });
 
-  const bothDone = completions.selfCare && completions.partnerCare;
+  const allDone = isSolo ? completions.selfCare : (completions.selfCare && completions.partnerCare);
+  const bothDone = allDone;
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -61,7 +70,9 @@ export default function TodayScreen() {
         <Text style={styles.heading}>Put on your{'\n'}oxygen mask first.</Text>
         {bothDone && (
           <View style={styles.completedBanner}>
-            <Text style={styles.completedText}>You showed up for yourself and your partner today. 🌱</Text>
+            <Text style={styles.completedText}>
+            {isSolo ? 'You showed up for yourself today. 🌱' : 'You showed up for yourself and your partner today. 🌱'}
+          </Text>
           </View>
         )}
         <NudgeCard
@@ -73,15 +84,18 @@ export default function TodayScreen() {
           accentLight={colors.secondaryLight}
           onDone={() => handleDone('selfCare')}
         />
-        <NudgeCard
-          title="Partner Care"
-          nudgeText={partnerCareNudge.text}
-          category={partnerCareNudge.category}
-          done={completions.partnerCare}
-          accentColor={colors.primary}
-          accentLight={colors.primaryLight}
-          onDone={() => handleDone('partnerCare')}
-        />
+        {!isSolo && (
+          <NudgeCard
+            title="Partner Care"
+            nudgeText={partnerCareNudge.text}
+            category={partnerCareNudge.category}
+            done={completions.partnerCare}
+            accentColor={colors.primary}
+            accentLight={colors.primaryLight}
+            darkButtonText
+            onDone={() => handleDone('partnerCare')}
+          />
+        )}
       </ScrollView>
     </SafeAreaView>
   );

@@ -22,9 +22,7 @@ export default function RootLayout() {
         options={{
           title: 'Today',
           tabBarLabel: 'Today',
-          tabBarIcon: ({ color }) => (
-            <TabIcon emoji="🌅" color={color} />
-          ),
+          tabBarIcon: ({ color }) => <TabIcon emoji="🌅" color={color} />,
         }}
       />
       <Tabs.Screen
@@ -32,9 +30,7 @@ export default function RootLayout() {
         options={{
           title: 'Streaks',
           tabBarLabel: 'Streaks',
-          tabBarIcon: ({ color }) => (
-            <TabIcon emoji="🔥" color={color} />
-          ),
+          tabBarIcon: ({ color }) => <TabIcon emoji="🔥" color={color} />,
         }}
       />
       <Tabs.Screen
@@ -42,9 +38,16 @@ export default function RootLayout() {
         options={{
           title: 'Check-In',
           tabBarLabel: 'Check-In',
-          tabBarIcon: ({ color }) => (
-            <TabIcon emoji="💬" color={color} />
-          ),
+          tabBarIcon: ({ color }) => <TabIcon emoji="💬" color={color} />,
+        }}
+      />
+      {/* Onboarding group — hidden from tab bar, full-screen */}
+      <Tabs.Screen
+        name="(onboarding)"
+        options={{
+          href: null,
+          headerShown: false,
+          tabBarStyle: { display: 'none' },
         }}
       />
     </Tabs>
